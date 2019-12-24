@@ -18,17 +18,17 @@ class Badge extends Component {
 					</div>
 
 					<div className="Badge__section-name">
-						<img className="Badge__avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg" alt="avatar"/>
-						<h1> Santiago
+						<img className="Badge__avatar" src={this.props.avatar} alt="avatar"/>
+						<h1> {this.props.firstName}
 							<br/> 
-							Prieto
+							{this.props.lastName}
 						</h1>
 					</div>
 
 					<div className="Badge__section-info">
-						<h3> Frontend developer
+						<h3> {this.props.jobTitle}
 						</h3>
-						<div> @SantiagoP
+						<div> @{this.props.twitter}
 						</div>
 					</div>
 
