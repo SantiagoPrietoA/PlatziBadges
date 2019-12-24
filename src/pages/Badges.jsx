@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 
 
-import Navbar from '../components/Navbar.jsx';
 import BadgesList from '../components/BadgesList.jsx';
 import logo from '../images/badge-header.svg';
 
@@ -45,30 +44,29 @@ class Badges extends Component {
     render() {
         return(
             <div>
-        <Navbar />
 
-        <div className="Badges">
-          <div className="Badges__hero">
-            <div className="Badges__container">
-              <img
-                className="Badges_conf-logo"
-                src={logo}
-                alt="Conf Logo"
-              />
+              <div className="Badges">
+                <div className="Badges__hero">
+                  <div className="Badges__container">
+                    <img
+                      className="Badges_conf-logo"
+                      src={logo}
+                      alt="Conf Logo"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="Badges__container">
+                <div className="Badges__buttons">
+                  <Link to="/badges/new" className="btn btn-primary">
+                    New Badge
+                  </Link>
+                </div>
+
+                <BadgesList badges={this.state.data} />
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="Badges__container">
-          <div className="Badges__buttons">
-            <Link to="/badges/new" className="btn btn-primary">
-              New Badge
-            </Link>
-          </div>
-
-          <BadgesList badges={this.state.data} />
-        </div>
-      </div>
         )
     }
 }
