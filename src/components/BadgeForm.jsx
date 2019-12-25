@@ -3,21 +3,18 @@ import React, { Component } from 'react';
 
 class BadgeForm extends Component {
 
-    handleClick = e => {
-        console.log('button was clicked');
-    }
+    // handleClick = e => {
+    //     console.log('button was clicked');
+    // }
 
-    handleSubmit = e => {
-        e.preventDefault()
-        console.log('Form was submitted');
-    }
+    
 
 
     render() {
         return(
             <div>
-                <h1>New attendant</h1>
-                <form onSubmit={this.handleSubmit} action="">
+                <h1>{this.props.titleForm}</h1>
+                <form onSubmit={this.props.onSubmit} action="">
                     <div className="form-group">
                         <label>First Name</label>
                         <input onChange={this.props.onChange} className="form-control" type="text" name="firstName" value={this.props.formValues.firstName} />
@@ -44,6 +41,10 @@ class BadgeForm extends Component {
                     </div>
 
                     <button onClick={this.handleClick} className="btn btn-primary">Save</button>
+
+                    {this.props.error && (
+                        <p className="text-danger">{this.props.error.message}</p>
+                    )}
                 </form>
             </div>
         )

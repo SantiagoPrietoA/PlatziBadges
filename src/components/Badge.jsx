@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import Gravatar from './Gravatar.jsx';
 
 import './styles/Badge.css'
 import '../global.css'
@@ -18,7 +19,7 @@ class Badge extends Component {
 					</div>
 
 					<div className="Badge__section-name">
-						<img className="Badge__avatar" src={this.props.avatar} alt="avatar"/>
+						<Gravatar className="Badge__avatar" avatarUrl={this.props.avatarUrl} />
 						<h1> {this.props.firstName}
 							<br/> 
 							{this.props.lastName}

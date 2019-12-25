@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import './styles/BadgeNew.css'
+import './styles/BadgeEdit.css'
 
 import header from "../images/platziconf-logo.svg";
 import Badge from "../components/Badge.jsx";
@@ -12,9 +12,10 @@ import md5 from 'md5';
 import api from '../api'
 
 
-class BadgeNew extends Component {
+class BadgeEdit extends Component {
     state={ 
-        isLoading: false,
+        isLoading: true,
+        error: null,
         form: {
             firstName: '',
             lastName: '',
@@ -41,13 +42,41 @@ class BadgeNew extends Component {
 
     }
 
+    componentDidMount() {
+
+        this.fetchData()
+    }
+
+    fetchData = async e => {
+
+        this.setState({ isLoading: true, error: null})
+        const badgeId = this.props.match.params.badgeId;
+
+        try {
+
+            const data = await api.badges.read(badgeId)
+
+            this.setState({ isLoading: false, form: data})
+            
+        } catch (error) {
+
+            this.setState({ isLoading: false, error: error})
+            
+
+            
+        }
+
+    }
+
     handleSubmit = async e => {
         e.preventDefault()
 
         this.setState({isLoading: true, error: null})
+        const badgeId = this.props.match.params.badgeId;
+
 
         try {
-            await api.badges.create(this.state.form)
+            await api.badges.update(badgeId, this.state.form)
             // console.log(this.state.form);
             this.setState({isLoading: false})
 
@@ -68,8 +97,8 @@ class BadgeNew extends Component {
         }
         return(
             <div>
-                <div className="BadgeNew__hero ">
-                    <img className="img-fluid BadgeNew__hero-image" src={header} alt="logo"/>
+                <div className="BadgeEdit__hero ">
+                    <img className="img-fluid BadgeEdit__hero-image" src={header} alt="logo"/>
                 </div>
 
                 <div className="container">
@@ -92,7 +121,7 @@ class BadgeNew extends Component {
                                 onChange={this.handleChange} 
                                 formValues={this.state.form}
                                 error={this.state.error}
-                                titleForm="New Attendant"
+                                titleForm="Edit Attendant"
                             >
                             </BadgeForm>
                         </div>
@@ -103,4 +132,4 @@ class BadgeNew extends Component {
     };
 };
 
-export default BadgeNew;
+export default BadgeEdit;
